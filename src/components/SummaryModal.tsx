@@ -47,7 +47,7 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, state, onClo
         <div className="p-4 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Trophy className="w-5 h-5 text-amber-400" />
-            <h2 className="text-base font-black text-white">Resumo da Pelada</h2>
+            <h2 className="text-base font-black text-white">Resumo da Partida</h2>
           </div>
           <button
             onClick={onClose}
@@ -180,17 +180,17 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, state, onClo
             onClick={handleCopyWhatsApp}
             className="w-full py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg active:scale-95 transition"
           >
-            {copied ? (
-              <>
-                <Check className="w-4 h-4" />
-                Resumo Copiado! Só colar no WhatsApp
-              </>
-            ) : (
-              <>
-                <Share2 className="w-4 h-4" />
-                Copiar Resumo para o WhatsApp
-              </>
-            )}
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4" />
+                  Resumo Copiado!
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-4 h-4" />
+                  Copiar Resumo da Partida
+                </>
+              )}
           </button>
         </div>
       </div>

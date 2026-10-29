@@ -22,31 +22,20 @@ import { QueueSection } from './components/QueueSection';
 import { PlayerModal } from './components/PlayerModal';
 import { SummaryModal } from './components/SummaryModal';
 
-const STORAGE_KEY = 'volei_da_galera_state_v1';
-
-const DEFAULT_RAW_LIST = `1- Joice
-2- Keven
-3- Jéssica
-4- Diego
-5- Sidney
-6- Sophia
-7- Rafaela
-8- Isa
-9- Guilherme
-10- Cg`;
+const STORAGE_KEY = 'volei_da_galera_state_v2';
 
 const INITIAL_STATE: GameState = {
   view: 'setup',
   config: {
-    teamSize: 6,
-    maxWins: 3,
-    targetScore: 25,
+    teamSize: 4,
+    maxWins: 5,
+    targetScore: 7,
     deuceRule: true,
     shuffleInitial: true,
     teamAName: 'TIME A',
     teamBName: 'TIME B'
   },
-  rawListText: DEFAULT_RAW_LIST,
+  rawListText: '',
   teamA: [],
   teamB: [],
   queue: [],
@@ -625,9 +614,9 @@ export const App: React.FC = () => {
             className="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-4 text-center"
           >
             <div className="text-4xl">🏐</div>
-            <h3 className="text-lg font-black text-white">Encerrar a pelada de hoje?</h3>
+            <h3 className="text-lg font-black text-white">Encerrar a partida de hoje?</h3>
             <p className="text-xs text-slate-400">
-              Você pode ver e copiar o ranking do dia para o WhatsApp antes de voltar para a tela inicial.
+              Você pode ver e copiar o resumo e ranking do dia antes de voltar para a tela inicial.
             </p>
             <div className="space-y-2 pt-1">
               <button
@@ -637,7 +626,7 @@ export const App: React.FC = () => {
                 }}
                 className="w-full py-3 rounded-xl bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider"
               >
-                Ver Resumo / Copiar pro WhatsApp
+                Ver Resumo / Copiar Ranking
               </button>
               <button
                 onClick={() => {

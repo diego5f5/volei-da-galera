@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({
               Vôlei da Galera
             </h1>
             <p className="text-[11px] font-medium text-amber-400/90 mt-0.5">
-              {view === 'setup' ? 'Configurar Pelada' : `Em Quadra • ${historyCount} ${historyCount === 1 ? 'jogo' : 'jogos'}`}
+              {view === 'setup' ? 'Configurar Partida' : `Em Quadra • ${historyCount} ${historyCount === 1 ? 'jogo' : 'jogos'}`}
             </p>
           </div>
         </div>

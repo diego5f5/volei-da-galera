@@ -1,6 +1,6 @@
 # 🏐 Vôlei da Galera
 
-Aplicação Web Progressiva (**PWA**) para organizar partidas e peladas de vôlei entre amigos, com sorteio de times, controle automático de fila ("Rei da Quadra"), placar em tela cheia e ranking exportável para o WhatsApp.
+Aplicação Web Progressiva (**PWA**) para organizar partidas de vôlei entre amigos, com sorteio de times, controle automático de fila ("Rei da Quadra"), placar em tela cheia e ranking exportável para o WhatsApp.
 
 ## ✨ Funcionalidades
 
