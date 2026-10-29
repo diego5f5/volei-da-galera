@@ -530,7 +530,12 @@ export const App: React.FC = () => {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-16 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+        <div
+          className="fixed left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+          style={{
+            top: 'calc(max(4rem, env(safe-area-inset-top, 0px) + 3.5rem))'
+          }}
+        >
           <div className="bg-slate-800/95 border border-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-2xl animate-fadeIn">
             {toastMessage}
           </div>
@@ -562,7 +567,12 @@ export const App: React.FC = () => {
       />
 
       {/* Main Content */}
-      <main className="flex-1 w-full max-w-md mx-auto p-4">
+      <main
+        className="flex-1 w-full max-w-md mx-auto p-4"
+        style={{
+          paddingBottom: 'calc(max(1.5rem, env(safe-area-inset-bottom, 0px)) + 1rem)'
+        }}
+      >
         {state.view === 'setup' ? (
           <SetupView
             rawListText={state.rawListText}
@@ -615,7 +625,6 @@ export const App: React.FC = () => {
               config={state.config}
               canRerollInitialTeams={state.history.length === 0}
               onRerollInitialTeams={handleRerollInitialTeams}
-              onSubstitutePlayer={handleSubstitutePlayer}
               onSelectPlayer={(p) => setSelectedPlayerId(p.id)}
               onRegisterWin={handleRegisterWin}
             />
@@ -625,7 +634,6 @@ export const App: React.FC = () => {
               queue={state.queue}
               teamSize={state.config.teamSize}
               onAddPlayer={handleAddPlayerMidGame}
-              onRemoveFromQueue={handleRemovePlayer}
               onSelectPlayer={(p) => setSelectedPlayerId(p.id)}
             />
 

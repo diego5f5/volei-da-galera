@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeftRight, Trophy, Flame, Shuffle } from 'lucide-react';
+import { Trophy, Flame, Shuffle } from 'lucide-react';
 import { MatchConfig, Player, TeamId } from '../types/game';
 
 interface CourtTeamsProps {
@@ -8,7 +8,6 @@ interface CourtTeamsProps {
   config: MatchConfig;
   canRerollInitialTeams: boolean;
   onRerollInitialTeams: () => void;
-  onSubstitutePlayer: (team: TeamId, playerId: number) => void;
   onSelectPlayer: (player: Player) => void;
   onRegisterWin: (team: TeamId) => void;
 }
@@ -19,7 +18,6 @@ export const CourtTeams: React.FC<CourtTeamsProps> = ({
   config,
   canRerollInitialTeams,
   onRerollInitialTeams,
-  onSubstitutePlayer,
   onSelectPlayer,
   onRegisterWin
 }) => {
@@ -85,17 +83,6 @@ export const CourtTeams: React.FC<CourtTeamsProps> = ({
                   <span className="bg-slate-800 text-slate-300 text-[10px] font-semibold px-1.5 py-0.5 rounded-full border border-slate-700">
                     🏐{player.gamesPlayed}
                   </span>
-                  <button
-                    type="button"
-                    title="Substituir pelo próximo da fila"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSubstitutePlayer(teamId, player.id);
-                    }}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-slate-800 active:scale-90 transition"
-                  >
-                    <ArrowLeftRight className="w-3.5 h-3.5" />
-                  </button>
                 </div>
               </div>
             ))

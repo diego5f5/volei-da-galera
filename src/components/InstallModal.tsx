@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, Share2, PlusSquare, Smartphone, CheckCircle2 } from 'lucide-react';
 
 interface InstallModalProps {
@@ -8,6 +8,19 @@ interface InstallModalProps {
 }
 
 export const InstallModal: React.FC<InstallModalProps> = ({ isOpen, isIOS, onClose }) => {
+  useEffect(() => {
+    if (isOpen) {
+      const prevBodyOverflow = document.body.style.overflow;
+      const prevHtmlOverflow = document.documentElement.style.overflow;
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = prevBodyOverflow;
+        document.documentElement.style.overflow = prevHtmlOverflow;
+      };
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (

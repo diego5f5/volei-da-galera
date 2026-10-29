@@ -8,7 +8,15 @@ interface InstallBannerProps {
 
 export const InstallBanner: React.FC<InstallBannerProps> = ({ onInstall, onDismiss }) => {
   return (
-    <aside aria-label="Instalar aplicativo" className="w-full bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 border-b border-blue-500/30 px-3.5 py-2.5 shadow-xl relative z-40 animate-fadeIn">
+    <aside
+      aria-label="Instalar aplicativo"
+      className="w-full bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 border-b border-blue-500/30 px-3.5 pb-2.5 shadow-xl relative z-40 animate-fadeIn"
+      style={{
+        paddingTop: 'calc(max(0.625rem, env(safe-area-inset-top, 0px)) + 0.25rem)',
+        paddingLeft: 'max(0.875rem, env(safe-area-inset-left, 0px))',
+        paddingRight: 'max(0.875rem, env(safe-area-inset-right, 0px))'
+      }}
+    >
       <div className="max-w-md mx-auto flex items-center justify-between gap-3">
         {/* Logo / Info */}
         <div className="flex items-center gap-2.5 min-w-0">

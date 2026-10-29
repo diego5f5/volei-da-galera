@@ -30,7 +30,14 @@ export const Header: React.FC<HeaderProps> = ({
   onResetSession
 }) => {
   return (
-    <header className="sticky top-0 z-30 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 pt-3 pb-3 shadow-lg">
+    <header
+      className="sticky top-0 z-30 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 pb-3 shadow-lg"
+      style={{
+        paddingTop: 'calc(max(0.75rem, env(safe-area-inset-top, 0px)) + 0.25rem)',
+        paddingLeft: 'max(1rem, env(safe-area-inset-left, 0px))',
+        paddingRight: 'max(1rem, env(safe-area-inset-right, 0px))'
+      }}
+    >
       <div className="flex items-center justify-between max-w-md mx-auto">
         {/* Brand */}
         <div className="flex items-center gap-2.5">
