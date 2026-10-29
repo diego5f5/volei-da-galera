@@ -97,7 +97,7 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, state, onClo
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-2.5">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 space-y-2.5">
           {tab === 'ranking' ? (
             rankedPlayers.length === 0 ? (
               <p className="text-center text-xs text-slate-500 py-8">Nenhum jogador registrado.</p>
@@ -116,17 +116,17 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, state, onClo
                         : 'bg-slate-950 border-slate-800'
                     }`}
                   >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="text-sm font-black w-6 text-center">{medal}</span>
-                      <div className="truncate">
+                    <div className="flex items-center gap-3 min-w-0 pr-2">
+                      <span className="text-sm font-black w-6 text-center shrink-0">{medal}</span>
+                      <div className="min-w-0 truncate">
                         <div className="text-xs font-bold text-white truncate">{player.name}</div>
-                        <div className="text-[10px] text-slate-400">
+                        <div className="text-[10px] text-slate-400 truncate">
                           Aproveitamento: {winRate}% • Máx seq: {player.maxWinStreak}🔥
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
+                    <div className="flex items-center gap-1.5 shrink-0">
                       <span className="px-2 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-black">
                         {player.wins}V
                       </span>
@@ -146,39 +146,60 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, state, onClo
             [...state.history].reverse().map((m) => (
               <div
                 key={m.id}
-                className="bg-slate-950 border border-slate-800 rounded-2xl p-3 space-y-2"
+                className="bg-slate-950 border border-slate-800 rounded-2xl p-3 space-y-2.5 overflow-hidden"
               >
-                <div className="flex items-center justify-between text-[11px] text-slate-400 font-semibold">
-                  <span>Jogo #{m.matchNumber}</span>
-                  <span>⏱️ {formatTime(m.durationSeconds)}</span>
+                {/* Cabeçalho do jogo: Jogo #X e Duração */}
+                <div className="flex items-center justify-between text-[11px] text-slate-400 font-semibold border-b border-slate-800/80 pb-2">
+                  <span className="font-bold text-slate-200">Jogo #{m.matchNumber}</span>
+                  <span className="font-mono text-slate-400">⏱️ {formatTime(m.durationSeconds)}</span>
                 </div>
 
-                <div className="flex items-center justify-between bg-slate-900 rounded-xl p-2.5 border border-slate-800">
-                  <div className="flex-1">
-                    <div className="text-xs font-black text-sky-400 flex items-center gap-1">
-                      TIME A {m.winner === 'A' && '🏆'}
+                {/* Confronto e Placar central (grid 3 colunas que nunca estoura nem quebra) */}
+                <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+                  {/* Time A */}
+                  <div className="min-w-0 flex flex-col justify-center">
+                    <div className="text-xs font-black text-sky-400 flex items-center gap-1 truncate">
+                      <span>TIME A</span>
+                      {m.winner === 'A' && <span title="Vencedor">🏆</span>}
                     </div>
-                    <div className="text-[10px] text-slate-400 truncate">
+                    <div className="text-[10px] text-slate-400 leading-snug break-words mt-1">
                       {m.teamANames.join(', ')}
                     </div>
                   </div>
 
-                  <div className="px-3 text-lg font-black text-white tabular-nums">
-                    {m.scoreA} <span className="text-slate-600 text-xs">x</span> {m.scoreB}
+                  {/* Placar central - sempre em linha única (whitespace-nowrap) */}
+                  <div className="shrink-0 px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-center gap-1.5 whitespace-nowrap shadow-xs">
+                    <span
+                      className={`text-base font-black tabular-nums ${
+                        m.winner === 'A' ? 'text-amber-400' : 'text-slate-200'
+                      }`}
+                    >
+                      {m.scoreA}
+                    </span>
+                    <span className="text-slate-600 font-bold text-xs">x</span>
+                    <span
+                      className={`text-base font-black tabular-nums ${
+                        m.winner === 'B' ? 'text-amber-400' : 'text-slate-200'
+                      }`}
+                    >
+                      {m.scoreB}
+                    </span>
                   </div>
 
-                  <div className="flex-1 text-right">
-                    <div className="text-xs font-black text-rose-400 flex items-center justify-end gap-1">
-                      {m.winner === 'B' && '🏆'} TIME B
+                  {/* Time B */}
+                  <div className="min-w-0 flex flex-col justify-center items-end text-right">
+                    <div className="text-xs font-black text-rose-400 flex items-center justify-end gap-1 truncate">
+                      {m.winner === 'B' && <span title="Vencedor">🏆</span>}
+                      <span>TIME B</span>
                     </div>
-                    <div className="text-[10px] text-slate-400 truncate">
+                    <div className="text-[10px] text-slate-400 leading-snug break-words mt-1 text-right">
                       {m.teamBNames.join(', ')}
                     </div>
                   </div>
                 </div>
 
                 {m.rotatedByMaxWins && (
-                  <div className="text-[10px] text-amber-400 font-bold text-center">
+                  <div className="text-[10px] text-amber-400 font-bold text-center pt-2 border-t border-slate-800/60">
                     🔥 Limite de vitórias atingido — Time vencedor também rodou!
                   </div>
                 )}
