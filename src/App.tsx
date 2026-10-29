@@ -196,6 +196,39 @@ export const App: React.FC = () => {
     );
   };
 
+  const handleRerollInitialTeams = () => {
+    if (state.history.length > 0) return;
+    pushUndo(state, 'Re-sorteio dos times iniciais');
+
+    const allPlayers = shuffleArray([...state.teamA, ...state.teamB, ...state.queue]);
+    const teamA: Player[] = [];
+    const teamB: Player[] = [];
+    const queue: Player[] = [];
+    const now = Date.now();
+
+    allPlayers.forEach((player, index) => {
+      if (teamA.length < state.config.teamSize) {
+        teamA.push({ ...player, waitingSince: 0 });
+      } else if (teamB.length < state.config.teamSize) {
+        teamB.push({ ...player, waitingSince: 0 });
+      } else {
+        queue.push({
+          ...player,
+          waitingSince: now + index
+        });
+      }
+    });
+
+    setState((prev) => ({
+      ...prev,
+      teamA,
+      teamB,
+      queue
+    }));
+
+    showToast('🎲 Times iniciais re-sorteados!');
+  };
+
   const handleUpdateScore = (team: TeamId, delta: number) => {
     const currentScore = team === 'A' ? state.match.scoreA : state.match.scoreB;
     const newScore = Math.max(0, currentScore + delta);
@@ -522,6 +555,8 @@ export const App: React.FC = () => {
             <Scoreboard
               match={state.match}
               config={state.config}
+              teamA={state.teamA}
+              teamB={state.teamB}
               isFullscreen={isFullscreen}
               onUpdateScore={handleUpdateScore}
               onToggleTimer={() =>
@@ -551,6 +586,8 @@ export const App: React.FC = () => {
               teamA={state.teamA}
               teamB={state.teamB}
               config={state.config}
+              canRerollInitialTeams={state.history.length === 0}
+              onRerollInitialTeams={handleRerollInitialTeams}
               onSubstitutePlayer={handleSubstitutePlayer}
               onSelectPlayer={(p) => setSelectedPlayerId(p.id)}
               onRegisterWin={handleRegisterWin}

@@ -1,11 +1,13 @@
 import React from 'react';
-import { ArrowLeftRight, Trophy, Flame } from 'lucide-react';
+import { ArrowLeftRight, Trophy, Flame, Shuffle } from 'lucide-react';
 import { MatchConfig, Player, TeamId } from '../types/game';
 
 interface CourtTeamsProps {
   teamA: Player[];
   teamB: Player[];
   config: MatchConfig;
+  canRerollInitialTeams: boolean;
+  onRerollInitialTeams: () => void;
   onSubstitutePlayer: (team: TeamId, playerId: number) => void;
   onSelectPlayer: (player: Player) => void;
   onRegisterWin: (team: TeamId) => void;
@@ -15,6 +17,8 @@ export const CourtTeams: React.FC<CourtTeamsProps> = ({
   teamA,
   teamB,
   config,
+  canRerollInitialTeams,
+  onRerollInitialTeams,
   onSubstitutePlayer,
   onSelectPlayer,
   onRegisterWin
@@ -116,9 +120,27 @@ export const CourtTeams: React.FC<CourtTeamsProps> = ({
   };
 
   return (
-    <div className="grid grid-cols-2 gap-3">
-      {renderTeamColumn('A', teamA)}
-      {renderTeamColumn('B', teamB)}
+    <div className="space-y-2.5">
+      {canRerollInitialTeams && (
+        <div className="flex items-center justify-between bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-2">
+          <span className="text-[11px] font-semibold text-slate-400">
+            1ª Partida • Sorteio inicial
+          </span>
+          <button
+            type="button"
+            onClick={onRerollInitialTeams}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/30 text-amber-300 text-xs font-extrabold transition active:scale-95"
+          >
+            <Shuffle className="w-3.5 h-3.5" />
+            Re-sortear Times
+          </button>
+        </div>
+      )}
+
+      <div className="grid grid-cols-2 gap-3">
+        {renderTeamColumn('A', teamA)}
+        {renderTeamColumn('B', teamB)}
+      </div>
     </div>
   );
 };
