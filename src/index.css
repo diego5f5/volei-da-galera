@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+:root {
+  /* Altere apenas aqui para aumentar ou diminuir o respiro no topo de todo o app */
+  --safe-top-extra: 1.375rem; /* +10px extras (total ~22px de respiro) para garantir folga no PWA do iPhone */
+  --app-safe-top: calc(max(1rem, env(safe-area-inset-top, 0px)) + var(--safe-top-extra));
+  --app-safe-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+}
+
 @layer base {
   html, body, #root {
     min-height: 100%;

@@ -533,7 +533,7 @@ export const App: React.FC = () => {
         <div
           className="fixed left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
           style={{
-            top: 'calc(max(4rem, env(safe-area-inset-top, 0px) + 3.5rem))'
+            top: 'calc(var(--app-safe-top) + 3.5rem)'
           }}
         >
           <div className="bg-slate-800/95 border border-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-2xl animate-fadeIn">
@@ -570,7 +570,7 @@ export const App: React.FC = () => {
       <main
         className="flex-1 w-full max-w-md mx-auto p-4"
         style={{
-          paddingBottom: 'calc(max(1.5rem, env(safe-area-inset-bottom, 0px)) + 1rem)'
+          paddingBottom: 'calc(var(--app-safe-bottom) + 1rem)'
         }}
       >
         {state.view === 'setup' ? (

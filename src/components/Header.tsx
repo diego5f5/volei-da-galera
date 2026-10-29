@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       className="sticky top-0 z-30 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 pb-3 shadow-lg"
       style={{
-        paddingTop: 'calc(max(0.75rem, env(safe-area-inset-top, 0px)) + 0.25rem)',
+        paddingTop: 'var(--app-safe-top)',
         paddingLeft: 'max(1rem, env(safe-area-inset-left, 0px))',
         paddingRight: 'max(1rem, env(safe-area-inset-right, 0px))'
       }}

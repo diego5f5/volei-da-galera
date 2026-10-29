@@ -258,7 +258,7 @@ export const Scoreboard: React.FC<ScoreboardProps> = ({
             maxWidth: '100vw',
             height: '100dvh',
             maxHeight: '100dvh',
-            paddingTop: 'max(0.75rem, env(safe-area-inset-top, 0px))',
+            paddingTop: 'var(--app-safe-top)',
             paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))',
             paddingLeft: 'max(0.75rem, env(safe-area-inset-left, 0px))',
             paddingRight: 'max(0.75rem, env(safe-area-inset-right, 0px))'
