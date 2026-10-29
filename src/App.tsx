@@ -14,7 +14,10 @@ import {
   sortQueuePlayers
 } from './utils/volleyballRules';
 import { soundFX } from './utils/sound';
+import { usePWAInstall } from './hooks/usePWAInstall';
 import { Header } from './components/Header';
+import { InstallBanner } from './components/InstallBanner';
+import { InstallModal } from './components/InstallModal';
 import { SetupView } from './components/SetupView';
 import { Scoreboard } from './components/Scoreboard';
 import { CourtTeams } from './components/CourtTeams';
@@ -78,6 +81,16 @@ export const App: React.FC = () => {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
   const [isConfirmEndOpen, setIsConfirmEndOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const {
+    isInstalled,
+    bannerDismissed,
+    isIOS,
+    showIOSModal,
+    setShowIOSModal,
+    dismissBanner,
+    triggerInstall
+  } = usePWAInstall();
 
   const showToast = useCallback((msg: string) => {
     setToastMessage(msg);
@@ -510,6 +523,11 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+      {/* PWA Install Banner Overlay at Top */}
+      {!isInstalled && !bannerDismissed && (
+        <InstallBanner onInstall={triggerInstall} onDismiss={dismissBanner} />
+      )}
+
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-16 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
@@ -526,8 +544,17 @@ export const App: React.FC = () => {
         canUndo={undoStack.length > 0}
         lastUndoLabel={undoStack[undoStack.length - 1]?.label}
         historyCount={state.history.length}
+        showInstallButton={!isInstalled}
+        onInstallClick={triggerInstall}
         onToggleSound={() =>
-          setState((prev) => ({ ...prev, soundEnabled: !prev.soundEnabled }))
+          setState((prev) => {
+            const nextSound = !prev.soundEnabled;
+            if (nextSound) {
+              soundFX.unlock();
+              soundFX.playPoint(true);
+            }
+            return { ...prev, soundEnabled: nextSound };
+          })
         }
         onUndo={handleUndo}
         onOpenSummary={() => setIsSummaryOpen(true)}
@@ -638,6 +665,13 @@ export const App: React.FC = () => {
         isOpen={isSummaryOpen}
         state={state}
         onClose={() => setIsSummaryOpen(false)}
+      />
+
+      {/* Modal de Instalação PWA */}
+      <InstallModal
+        isOpen={showIOSModal}
+        isIOS={isIOS}
+        onClose={() => setShowIOSModal(false)}
       />
 
       {/* Modal de Confirmação para Encerrar Sessão */}

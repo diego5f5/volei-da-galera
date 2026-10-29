@@ -251,9 +251,21 @@ export const Scoreboard: React.FC<ScoreboardProps> = ({
 
       {/* Overlay Placar Pro em Tela Cheia */}
       {isFullscreen && (
-        <div className="fixed inset-0 z-50 bg-slate-950 text-white flex flex-col justify-between p-3 sm:p-6 animate-fadeIn select-none overflow-hidden touch-none">
+        <div
+          className="fixed inset-0 z-50 bg-slate-950 text-white flex flex-col justify-between animate-fadeIn select-none overflow-hidden touch-none"
+          style={{
+            width: '100vw',
+            maxWidth: '100vw',
+            height: '100dvh',
+            maxHeight: '100dvh',
+            paddingTop: 'max(0.75rem, env(safe-area-inset-top, 0px))',
+            paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))',
+            paddingLeft: 'max(0.75rem, env(safe-area-inset-left, 0px))',
+            paddingRight: 'max(0.75rem, env(safe-area-inset-right, 0px))'
+          }}
+        >
           {/* Top Bar */}
-          <div className="flex items-center justify-between gap-2 shrink-0">
+          <div className="flex items-center justify-between gap-2 shrink-0 px-1">
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-bold text-slate-300">
                 Set a {config.targetScore} pts {config.deuceRule ? '(Vai a 2)' : ''}
@@ -304,16 +316,16 @@ export const Scoreboard: React.FC<ScoreboardProps> = ({
 
           {/* Winner Banner in Fullscreen */}
           {evalStatus.winner && (
-            <div className="my-1.5 flex justify-center shrink-0">
+            <div className="my-2 flex justify-center shrink-0 px-1 w-full">
               <button
                 onClick={() => {
                   onRegisterWin(evalStatus.winner!);
                   onToggleFullscreen();
                 }}
-                className="px-6 py-2.5 rounded-2xl bg-emerald-500 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-xl shadow-emerald-500/30 animate-bounce"
+                className="w-full py-2.5 px-3 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 animate-pulse transition active:scale-[0.99]"
               >
                 <Trophy className="w-4 h-4" />
-                CONFIRMAR VITÓRIA DO TIME {evalStatus.winner} E RODAR FILA
+                FIM DE SET! CONFIRMAR VITÓRIA DO TIME {evalStatus.winner}
               </button>
             </div>
           )}

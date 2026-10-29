@@ -1,5 +1,5 @@
 import React from 'react';
-import { Volume2, VolumeX, Undo2, Trophy, RotateCcw } from 'lucide-react';
+import { Volume2, VolumeX, Undo2, Trophy, RotateCcw, Download } from 'lucide-react';
 import { AppView } from '../types/game';
 
 interface HeaderProps {
@@ -8,6 +8,8 @@ interface HeaderProps {
   canUndo: boolean;
   lastUndoLabel?: string;
   historyCount: number;
+  showInstallButton?: boolean;
+  onInstallClick?: () => void;
   onToggleSound: () => void;
   onUndo: () => void;
   onOpenSummary: () => void;
@@ -20,6 +22,8 @@ export const Header: React.FC<HeaderProps> = ({
   canUndo,
   lastUndoLabel,
   historyCount,
+  showInstallButton = false,
+  onInstallClick,
   onToggleSound,
   onUndo,
   onOpenSummary,
@@ -47,6 +51,16 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Quick Actions */}
         <div className="flex items-center gap-1.5">
+          {showInstallButton && onInstallClick && (
+            <button
+              onClick={onInstallClick}
+              title="Instalar App na tela de início"
+              className="p-2 rounded-xl bg-amber-400/15 border border-amber-400/30 text-amber-300 hover:bg-amber-400/25 transition active:scale-95"
+            >
+              <Download className="w-4 h-4" />
+            </button>
+          )}
+
           {view === 'match' && (
             <>
               <button
