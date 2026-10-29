@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <linearGradient id="yellowPanel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+    <linearGradient id="bluePanel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="165" fill="#ffffff" stroke="#0f172a" stroke-width="14"/>
+  <path d="M 118 164 C 194 128, 308 138, 396 168 C 358 104, 292 91, 256 91 C 198 91, 148 120, 118 164 Z" fill="url(#yellowPanel)"/>
+  <path d="M 110 334 C 170 255, 240 208, 382 190 C 415 236, 420 302, 386 358 C 306 306, 202 302, 110 334 Z" fill="url(#bluePanel)"/>
+  <path d="M 160 390 C 236 350, 320 355, 374 372 C 340 406, 296 421, 256 421 C 218 421, 186 408, 160 390 Z" fill="url(#yellowPanel)"/>
+  <path d="M 114 168 C 198 130, 310 140, 400 172" fill="none" stroke="#0f172a" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 93 256 C 190 208, 308 202, 418 242" fill="none" stroke="#0f172a" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 114 340 C 208 298, 312 310, 386 358" fill="none" stroke="#0f172a" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 248 91 C 208 184, 212 308, 274 420" fill="none" stroke="#0f172a" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="165" fill="none" stroke="#0f172a" stroke-width="14"/>
+</svg>
