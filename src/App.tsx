@@ -652,6 +652,7 @@ export const App: React.FC = () => {
 
       {/* Modal de Detalhes do Jogador */}
       <PlayerModal
+        key={selectedPlayerInfo.player?.id ?? 'empty'}
         player={selectedPlayerInfo.player}
         location={selectedPlayerInfo.location}
         onClose={() => setSelectedPlayerId(null)}
